@@ -14,7 +14,10 @@ RUN npm ci
 # Копируем все остальные файлы
 COPY . .
 
-# Компилируем
+# Компилируем Prisma
+RUN npx prisma generate
+
+# Компилируем всё остальное
 RUN npm run build
 
 # Запускаем
