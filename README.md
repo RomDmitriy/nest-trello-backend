@@ -11,3 +11,6 @@
 2) В `.env` изменяете ссылку на PostgreSQL на вашу.
 3) Из директории `server/` пропишите команду `npx prisma db push`. Это создаст структуру БД в PostgreSQL из Docker-контейнера. Если там раньше была какая-то структура, то могут быть проблемы.
 4) Запускайте Backend командой `npm start`.
+
+### Схема БД:
+![image](https://github.com/user-attachments/assets/b04abaa5-e9c7-4f5b-9692-0478af0734b7)
