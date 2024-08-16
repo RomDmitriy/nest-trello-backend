@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cards {
+  id          Int        @id @default(autoincrement())
+  column_id   Int
+  index       Int
+  title       String     @db.VarChar(64)
+  description String
+  comments    comments[]
+  columns     columns?   @relation(fields: [column_id], references: [id])
+
+  @@unique([column_id, index])
+}
+
+model columns {
+  id       Int     @id @default(autoincrement())
+  owner_id Int
+  name     String  @db.VarChar(24)
+  index    Int     @db.SmallInt
+  cards    cards[]
+  users    users   @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+
+  @@unique([owner_id, index])
+}
+
+model comments {
+  id        Int       @id @default(autoincrement())
+  author_id Int
+  card_id   Int
+  content   String
+  datetime  DateTime  @default(now())
+  edited    DateTime?
+  users     users     @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  cards     cards?    @relation(fields: [card_id], references: [id])
+}
+
+model users {
+  id       Int        @id @default(autoincrement())
+  email    String     @unique @db.VarChar
+  password String     @db.VarChar(60)
+  name     String     @db.VarChar(24)
+  columns  columns[]
+  comments comments[]
+}
