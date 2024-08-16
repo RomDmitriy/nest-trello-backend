@@ -7,7 +7,7 @@ export class NotFoundError extends Error {
 }
 
 export class ConflictError extends Error {
-  status: number = 404;
+  status: number = 419;
 
   constructor(message: string) {
     super(message);
