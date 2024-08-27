@@ -112,7 +112,6 @@ export class UsersController {
     try {
       return await this.usersService.update(parseInt(params.user_id), data);
     } catch (err) {
-      console.log(err);
       // Если ошибка уникальности эл. почты
       if (err.code === 'P2002') {
         throw new HttpException('Email already exists', HttpStatus.CONFLICT);

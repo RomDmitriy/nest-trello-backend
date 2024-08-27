@@ -54,7 +54,6 @@ export class CommentsService {
     author_id: number,
     data: CommentsCreateBodyDto,
   ): Promise<CommentDto> {
-    console.log(author_id, data);
     return this.databaseService.comments.create({
       data: {
         card_id,
